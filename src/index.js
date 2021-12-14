@@ -11,6 +11,6 @@ const foo2 = async () => await Promise.resolve("asd");
 foo2();
 
 class U {
-  static id = Date.now;
+  static id = Date.now();
 }
 console.log("U", U.id);

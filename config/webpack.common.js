@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const WebpackBar = require("webpackbar");
 const path = require("path");
 
 module.exports = {
@@ -38,6 +39,7 @@ module.exports = {
         },
       ],
     }),
+    new WebpackBar(),
   ],
   resolve: {
     extensions: [".js", ".scss", ".jpg", ".svg"],
