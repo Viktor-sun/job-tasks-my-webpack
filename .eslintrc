@@ -1,0 +1,8 @@
+{
+  "parser": "@babel/eslint-parser",
+  "rules": {
+    "no-unused-vars": "warn",
+    "comma-dangle": "off",
+    "space-before-function-paren": "off"
+  }
+}

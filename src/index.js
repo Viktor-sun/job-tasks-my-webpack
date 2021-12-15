@@ -3,7 +3,6 @@ import 'Assets/styles/css/st'
 import insert from './js/insertBg'
 import './test/typescripy'
 import { multiply } from 'Utilities/utilities'
-import reactDom from 'react-dom'
 console.log(multiply(1, 5))
 // insert();
 

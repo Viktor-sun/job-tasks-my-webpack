@@ -1,4 +1,5 @@
 const { merge } = require('webpack-merge')
+const ESLintPlugin = require('eslint-webpack-plugin')
 const commonConfig = require('./webpack.common')
 
 module.exports = merge(commonConfig, {
@@ -12,6 +13,13 @@ module.exports = merge(commonConfig, {
     historyApiFallback: true,
     hot: true,
     liveReload: true,
+    client: {
+      overlay: {
+        errors: true,
+        warnings: false,
+      },
+      progress: true,
+    },
   },
   module: {
     rules: [
@@ -21,4 +29,10 @@ module.exports = merge(commonConfig, {
       },
     ],
   },
+  plugins: [
+    new ESLintPlugin({
+      extensions: ['js', 'jsx'],
+      exclude: ['/node_modules/', '/config/'],
+    }),
+  ],
 })
