@@ -1,8 +1,11 @@
+@import './fonts.scss';
+
 body {
   background-color: tomato;
   transition: all 250ms ease;
   text-align: center;
   display: flex;
+  font-family: Caveat, sans-serif;
 }
 
 .bg {

@@ -10,7 +10,7 @@ module.exports = merge(commonConfig, {
   devtool: false,
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: '[name].[contenthash].bundle.js',
+    filename: 'js/[name].[contenthash].bundle.js',
   },
   module: {
     rules: [
@@ -25,10 +25,28 @@ module.exports = merge(commonConfig, {
       },
     ],
   },
-  plugins: [new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' })],
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'styles/[name].[contenthash].css',
+      chunkFilename: 'styles/[id].css',
+    }),
+  ],
   optimization: {
     splitChunks: {
-      chunks: 'all',
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module, chunks, cacheGroupKey) {
+            const moduleFileName = module
+              .identifier()
+              .split('/')
+              .reduceRight(item => item)
+            const allChunksNames = chunks.map(item => item.name).join('~')
+            return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`
+          },
+          chunks: 'all',
+        },
+      },
     },
     minimize: true,
     minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
