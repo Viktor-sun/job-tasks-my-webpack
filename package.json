@@ -4,9 +4,9 @@
   "description": "",
   "private": true,
   "scripts": {
-    "start": "webpack --mode=development --config ./config/webpack.dev.js",
-    "build": "webpack --mode=production --config ./config/webpack.prod.js",
-    "serve": "webpack serve --mode=development --config ./config/webpack.dev.js"
+    "start": "webpack --config config/webpack.dev.js",
+    "build": "webpack --config config/webpack.prod.js",
+    "serve": "webpack serve --config config/webpack.dev.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
+    "@babel/preset-typescript": "^7.16.5",
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^10.1.0",
     "css-loader": "^6.5.1",

@@ -15,7 +15,7 @@ module.exports = merge(commonConfig, {
   module: {
     rules: [
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.scss$/i,
         use: [
           MiniCssExtractPlugin.loader,
           "css-loader",
@@ -25,7 +25,7 @@ module.exports = merge(commonConfig, {
       },
     ],
   },
-  plugins: [new MiniCssExtractPlugin({ filename: "styles.css" })],
+  plugins: [new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" })],
   optimization: {
     splitChunks: {
       chunks: "all",
