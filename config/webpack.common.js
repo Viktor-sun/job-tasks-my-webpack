@@ -21,12 +21,7 @@ module.exports = {
         type: 'asset/inline',
       },
       {
-        test: /\.m?js$/,
-        exclude: /node_modules/,
-        use: ['babel-loader'],
-      },
-      {
-        test: /\.ts$/,
+        test: /\.(js|ts|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
@@ -47,7 +42,7 @@ module.exports = {
     new WebpackBar(),
   ],
   resolve: {
-    extensions: ['.js', '.ts', '.scss', '.jpg', '.svg'],
+    extensions: ['.js', '.ts', '.jsx', '.scss', '.css', '.jpg', '.svg'],
     alias: {
       Assets: path.resolve(__dirname, '../src/assets/'),
       Utilities: path.resolve(__dirname, '../src/utilities/'),

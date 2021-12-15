@@ -1,7 +1,9 @@
-import './css/styles'
+import 'Assets/styles/scss/styles'
+import 'Assets/styles/css/st'
 import insert from './js/insertBg'
-import './js/test'
+import './test/typescripy'
 import { multiply } from 'Utilities/utilities'
+import reactDom from 'react-dom'
 console.log(multiply(1, 5))
 // insert();
 
@@ -15,3 +17,8 @@ class U {
   static id = Date.now()
 }
 console.log('U', U.id)
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+import SectionComponent from './test/react'
+ReactDOM.render(<SectionComponent />, document.getElementById('root'))
