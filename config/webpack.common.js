@@ -21,10 +21,7 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        type: 'asset/resource',
-        generator: {
-          filename: 'assets/svg/[name][hash][ext]',
-        },
+        type: 'asset/inline',
       },
       {
         test: /\.(woff(2)?|eot|ttf|otf)$/,
@@ -45,7 +42,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../src/index.html'),
       filename: 'index.html',
-      // favicon: path.resolve(__dirname, '../src/assets/svg/favicon.svg'),
     }),
     new CopyPlugin({
       patterns: [
