@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const WebpackBar = require('webpackbar')
+const Dotenv = require('dotenv-webpack')
 const path = require('path')
 
 module.exports = {
@@ -52,6 +53,7 @@ module.exports = {
       ],
     }),
     new WebpackBar(),
+    new Dotenv(),
   ],
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.scss', '.css', '.jpg', '.svg'],
