@@ -1,23 +1,13 @@
-import 'Assets/styles/scss/styles'
-import 'Assets/styles/css/st'
-import insert from './js/insertBg'
-import './test/typescripy'
-import { multiply } from 'Utilities/utilities'
-console.log(multiply(1, 5))
-// insert();
-
-const foo = () => console.log('object')
-foo()
-
-const foo2 = async () => await Promise.resolve('asd')
-foo2()
-
-class U {
-  static id = Date.now()
-}
-console.log('U', U.id)
-
 import React from 'react'
 import ReactDOM from 'react-dom'
-import SectionComponent from './test/react'
-ReactDOM.render(<SectionComponent />, document.getElementById('root'))
+import { BrowserRouter } from 'react-router-dom'
+import App from './App'
+
+ReactDOM.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>,
+  document.getElementById('root'),
+)

@@ -2,7 +2,8 @@
   "parser": "@babel/eslint-parser",
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "es2021": true
   },
   "extends": [
     "eslint:recommended",
@@ -10,7 +11,7 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "no-unused-vars": "warn",
+    // "no-unused-vars": "warn",
     "comma-dangle": "off",
     "space-before-function-paren": "off"
   }
