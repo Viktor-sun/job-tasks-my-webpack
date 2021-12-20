@@ -1,0 +1,47 @@
+.form {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  height: 66px;
+  background-color: transparent;
+  padding: 16px 16px 16px 60px;
+  border: none;
+  font-size: 24px;
+  color: #4d4d4d;
+  border-bottom: solid 1px #e6e6e6;
+  box-shadow: inset 0 -2px 1px rgb(0 0 0 / 3%);
+  outline: none;
+}
+
+.input::placeholder {
+  font-size: 24px;
+  font-stretch: 100%;
+  font-style: italic;
+  color: #e6e6e6;
+}
+
+.btn {
+  position: absolute;
+  top: 6px;
+  left: 2px;
+  display: inline-block;
+  width: 54px;
+  height: 54px;
+  font-size: 22px;
+  padding: 10px;
+  transform: rotate(90deg);
+  background-color: transparent;
+  color: #e6e6e6;
+  border: none;
+  border-radius: 50%;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 250ms ease;
+}
+
+/* .btn.isSelect {
+  color: #737373;
+} */

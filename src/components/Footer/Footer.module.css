@@ -1,0 +1,60 @@
+.footer {
+  display: flex;
+  align-items: center;
+  padding: 7px 15px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 8px 0 -3px #f6f6f6,
+    0 9px 1px -3px rgba(0, 0, 0, 0.2), 0 16px 0 -6px #f6f6f6,
+    0 17px 2px -6px rgba(0, 0, 0, 0.2);
+}
+
+.counter {
+  font-weight: 300;
+  font-size: 14px;
+  color: #777;
+}
+
+.btnList {
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  margin-left: 90px;
+  list-style: none;
+}
+
+.sortBtn {
+  color: inherit;
+  margin: 3px;
+  padding: 3px 7px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: border-color 250ms ease;
+}
+
+.sortBtn:hover {
+  border-color: rgba(175, 47, 47, 0.1);
+}
+
+/* .sortButton.activeSortButton {
+  border-color: #efd5d5;
+} */
+
+.btnClear {
+  margin-left: auto;
+  font-weight: 300;
+  font-size: 14px;
+  color: #777;
+  cursor: pointer;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.btnClear:hover {
+  text-decoration: underline;
+}
+
+/* .btnClear.isHidden {
+  cursor: grab;
+} */

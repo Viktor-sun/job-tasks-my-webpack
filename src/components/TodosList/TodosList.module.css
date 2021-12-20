@@ -1,0 +1,105 @@
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  position: relative;
+  width: 100%;
+
+  padding: 15px 50px 15px 65px;
+  line-height: 1.2;
+  font-size: 24px;
+  border-bottom: 1px solid #ededed;
+  overflow-wrap: break-word;
+}
+
+.item:first-child {
+  border-top: 1px solid #ededed;
+}
+
+/* .todoItem.unactive {
+  text-decoration: line-through;
+  color: #d9d9d9;
+} */
+
+.btnDel {
+  position: absolute;
+  top: -4px;
+  right: 12px;
+  width: 20px;
+  height: 20px;
+  margin: auto 0;
+  font-size: 30px;
+  color: #cc9a9a;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 11px;
+  transition: color 0.2s ease-out, opacity 0.2s ease-out;
+  opacity: 0;
+  z-index: 5;
+}
+
+.btnDel::after {
+  content: '×';
+}
+
+.btnCopyText {
+  position: absolute;
+  top: 27px;
+  right: 13px;
+  width: 20px;
+  height: 20px;
+  margin: auto 0;
+  font-size: 30px;
+  color: #cc9a9a;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 11px;
+  transition: color 0.2s ease-out, opacity 0.2s ease-out;
+  opacity: 0;
+  z-index: 5;
+}
+
+.btnCopyText::after {
+  content: '©';
+}
+
+.item:hover .btnDel,
+.item:hover .btnCopyText {
+  color: #af5b5e;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.checkbox {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+}
+
+.checkboxIcon {
+  position: absolute;
+  top: 9px;
+  left: 8px;
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  border: solid 2px #ededed;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.checkboxChecked {
+  composes: checkboxIcon;
+  background-image: url('../../assets/svg/ok.svg');
+  background-size: contain;
+  border: solid 2px #bddad5;
+  border-radius: 50%;
+}

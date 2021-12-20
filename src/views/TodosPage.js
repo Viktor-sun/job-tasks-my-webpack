@@ -1,54 +1,31 @@
 import React, { Component } from 'react'
+import Title from '../components/Title'
+import Form from '../components/FormTodos'
+import TodosList from '../components/TodosList'
+import Footer from '../components/Footer/Footer'
 
 class TodosPage extends Component {
   render() {
     return (
-      <div className="container">
-        <h1 className="title">todos</h1>
+      <>
+        <Title text="todos" />
         <h2 className="titleHello">Hello undefined</h2>
-        <button className="btnLogout"></button>
-        <div className="formContainer">
-          <form className="form">
-            <button type="button" className="btnSelectAll">
-              ❯
-            </button>
-            <input
-              type="text"
-              id="input"
-              autoComplete="off"
-              placeholder="What needs to be done?"
-              autoFocus={true}
-              className="input"
-            />
-          </form>
-          <div className="todoContainer"></div>
-          <footer className="footer">
-            <span className="todoCounter">0 item left</span>
-            <ul className="sortButtonList">
-              <li>
-                <button type="button" id="buttonAll" className="sortButton">
-                  All
-                </button>
-              </li>
-              <li>
-                <button type="button" id="butttonActive" className="sortButton">
-                  Active
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  id="buttonCompleted"
-                  className="sortButton"
-                >
-                  Completed
-                </button>
-              </li>
-            </ul>
-            <button className="btnClear">Clear completed</button>
-          </footer>
+        <button className="btnLogout">logout</button>
+        <div
+          className="formContainer"
+          style={{
+            backgroundColor: '#fefefe',
+            boxShadow: '1px 23px 28px -3px rgba(114, 114, 114, 0.2)',
+            border: 'solid 2px #dbdbdb',
+            borderTop: 'none',
+          }}
+        >
+          <Form />
+          <TodosList />
+
+          <Footer />
         </div>
-      </div>
+      </>
     )
   }
 }
