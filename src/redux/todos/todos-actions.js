@@ -23,6 +23,10 @@ const selectTodoRequest = createAction('todos/selectTodoRequest')
 const selectTodoSuccess = createAction('todos/selectTodoSuccess')
 const selectTodoError = createAction('todos/selectTodoError')
 
+const updateTodoRequest = createAction('todos/updateTodoRequest')
+const updateTodoSuccess = createAction('todos/updateTodoSuccess')
+const updateTodoError = createAction('todos/updateTodoError')
+
 // const fetchTodosRequest = () => ({ type: actionTypes.FETCH_TODOS_REQUEST })
 // const fetchTodosSuccess = value => ({
 //   type: actionTypes.FETCH_TODOS_SUCCESS,
@@ -76,4 +80,7 @@ export default {
   selectTodoRequest,
   selectTodoSuccess,
   selectTodoError,
+  updateTodoRequest,
+  updateTodoSuccess,
+  updateTodoError,
 }

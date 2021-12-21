@@ -7,7 +7,7 @@ class FormTodos extends Component {
   state = { inputValue: '' }
 
   changeInput = e => {
-    this.setState({ inputValue: e.target.value })
+    this.setState({ inputValue: e.target.value.trim() })
   }
 
   onSubmit = e => {

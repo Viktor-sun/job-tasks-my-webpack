@@ -22,6 +22,12 @@ const todosReducer = createReducer([], {
     nextState[index].completed = payload.completed
     return nextState
   },
+  [actionsTodos.updateTodoSuccess()]: (state, { payload }) => {
+    const idx = state.findIndex(todo => todo._id === payload._id)
+    const newState = [...state]
+    newState[idx].todo = payload.todo
+    return newState
+  },
 
   // [actionsTypes.FETCH_TODOS_SUCCESS]: (_, { payload }) => payload,
   // [actionsTypes.ADD_TODO_SUCCESS]: (state, { payload }) => [...state, payload],

@@ -33,4 +33,12 @@ const selectTodo = (id, completed) => dispatch => {
     .catch(e => dispatch(actions.selectTodoError(e.message)))
 }
 
-export default { fetchTodos, addTodo, deleteTodo, selectTodo }
+const updateTodo = (id, todo) => dispatch => {
+  dispatch(actions.updateTodoRequest())
+
+  return callApi(`/api/todos/${id}`, { method: 'PATCH', body: { todo } })
+    .then(data => dispatch(actions.updateTodoSuccess(data.data.todo)))
+    .catch(e => dispatch(actions.updateTodoError(e.message)))
+}
+
+export default { fetchTodos, addTodo, deleteTodo, selectTodo, updateTodo }

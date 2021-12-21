@@ -5,6 +5,8 @@ import todosOperations from '../../redux/todos/todos-operations'
 import todosSelectors from '../../redux/todos/todos-selectors'
 
 export class TodosList extends Component {
+  state = { renderInputUpdate: false, todoId: 0 }
+
   componentDidMount() {
     this.props.fetchTodos()
   }
@@ -17,13 +19,47 @@ export class TodosList extends Component {
     this.props.deleteTodo(id)
   }
 
+  onCopyText = id => e => {
+    const text = this.props.todos.find(todo => todo._id === id).todo
+    navigator.clipboard.writeText(text).then(() => console.log('copied', e))
+  }
+
+  onRenderInputUpdate = id => () => {
+    this.setState({ renderInputUpdate: true, todoId: id })
+  }
+
+  onUpdate = id => e => {
+    this.updateTodo(id, e)
+  }
+
+  onKeyDown = id => e => {
+    if (e.code === 'Enter') {
+      this.updateTodo(id, e)
+    }
+  }
+
+  updateTodo(id, e) {
+    const value = e.target.value.trim()
+    if (value === '') {
+      this.props.deleteTodo(id)
+      return
+    }
+
+    this.props
+      .updateTodo(id, value)
+      .then(() => this.setState({ renderInputUpdate: false, todoId: 0 }))
+  }
+
   render() {
+    const { renderInputUpdate, todoId } = this.state
     const { todos } = this.props
+
     return (
       <div className="todoContainer">
         <ul className={s.list}>
           {todos.map(todo => (
             <li
+              onDoubleClick={this.onRenderInputUpdate(todo._id)}
               key={todo._id}
               className={todo.completed ? s.itemUnactive : s.item}
             >
@@ -42,20 +78,26 @@ export class TodosList extends Component {
                 ></span>
               </label>
               {todo.todo}
-              {/* <input
-                  className="updateTodoInput isHidden"
-                  data-index="61bb3fd893d14b3a6724eddd"
+              {renderInputUpdate && todoId === todo._id && (
+                <input
+                  className={s.update}
                   type="text"
-                /> */}
+                  autoFocus={true}
+                  defaultValue={todo.todo}
+                  onBlur={this.onUpdate(todo._id)}
+                  onKeyDown={this.onKeyDown(todo._id)}
+                />
+              )}
               <button
                 className={s.btnDel}
                 title="Delete"
                 onClick={this.onDelete(todo._id)}
               ></button>
-              {/* <button
+              <button
                 className={s.btnCopyText}
                 title="Copy to clipboard"
-              ></button> */}
+                onClick={this.onCopyText(todo._id)}
+              ></button>
             </li>
           ))}
         </ul>
@@ -70,9 +112,12 @@ const mapStateToProps = state => ({ todos: todosSelectors.getTodos(state) })
 //   fetchTodos: () => dispatch(todosOperations.fetchTodos()),
 // })
 
+const { fetchTodos, deleteTodo, selectTodo, updateTodo } = todosOperations
 const mapDispatchToProps = {
-  fetchTodos: todosOperations.fetchTodos,
-  deleteTodo: todosOperations.deleteTodo,
-  selectTodo: todosOperations.selectTodo,
+  fetchTodos,
+  deleteTodo,
+  selectTodo,
+  updateTodo,
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(TodosList)
