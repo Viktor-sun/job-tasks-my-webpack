@@ -6,7 +6,7 @@ const fetchTodos = () => dispatch => {
 
   callApi('/api/todos')
     .then(data => dispatch(actions.fetchTodosSuccess(data.data.todos)))
-    .catch(e => dispatch(actions.fetchTodosError(e)))
+    .catch(e => dispatch(actions.fetchTodosError(e.message)))
 }
 
 const addTodo = todo => dispatch => {
@@ -14,7 +14,7 @@ const addTodo = todo => dispatch => {
 
   callApi('/api/todos', { method: 'POST', body: { todo } })
     .then(data => dispatch(actions.addTodoSuccess(data.data.todo)))
-    .catch(e => dispatch(actions.addTodoError(e)))
+    .catch(e => dispatch(actions.addTodoError(e.message)))
 }
 
 const deleteTodo = id => dispatch => {
@@ -22,7 +22,15 @@ const deleteTodo = id => dispatch => {
 
   callApi(`/api/todos/${id}`, { method: 'DELETE' })
     .then(() => dispatch(actions.deleteTodoSuccess(id)))
-    .catch(e => dispatch(actions.deleteTodoError(e)))
+    .catch(e => dispatch(actions.deleteTodoError(e.message)))
 }
 
-export default { fetchTodos, addTodo, deleteTodo }
+const selectTodo = (id, completed) => dispatch => {
+  dispatch(actions.selectTodoRequest())
+
+  callApi(`/api/todos/${id}`, { method: 'PATCH', body: { completed } })
+    .then(data => dispatch(actions.selectTodoSuccess(data.data.todo)))
+    .catch(e => dispatch(actions.selectTodoError(e.message)))
+}
+
+export default { fetchTodos, addTodo, deleteTodo, selectTodo }

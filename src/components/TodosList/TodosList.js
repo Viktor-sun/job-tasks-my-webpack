@@ -10,7 +10,7 @@ export class TodosList extends Component {
   }
 
   changeCheckbox = id => e => {
-    console.log(id, e.target.checked)
+    this.props.selectTodo(id, e.target.checked)
   }
 
   onDelete = id => () => {
@@ -23,13 +23,17 @@ export class TodosList extends Component {
       <div className="todoContainer">
         <ul className={s.list}>
           {todos.map(todo => (
-            <li key={todo._id} className={s.item}>
+            <li
+              key={todo._id}
+              className={todo.completed ? s.itemUnactive : s.item}
+            >
               <label>
                 <input
                   className={s.checkbox}
                   type="checkbox"
                   name="status"
                   onClick={this.changeCheckbox(todo._id)}
+                  defaultChecked={todo.completed}
                 />
                 <span
                   className={
@@ -69,5 +73,6 @@ const mapStateToProps = state => ({ todos: todosSelectors.getTodos(state) })
 const mapDispatchToProps = {
   fetchTodos: todosOperations.fetchTodos,
   deleteTodo: todosOperations.deleteTodo,
+  selectTodo: todosOperations.selectTodo,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TodosList)
