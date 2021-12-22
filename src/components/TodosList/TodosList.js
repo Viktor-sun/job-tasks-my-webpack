@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import TodoItem from '../TodoItem'
 import s from './TodosList.module.css'
-import todosOperations from '../../redux/todos/todos-operations'
-import todosSelectors from '../../redux/todos/todos-selectors'
+import { todosOperations } from '@redux/thunks'
+import { todosSelectors } from '@redux/selectors'
 
 export class TodosList extends Component {
   componentDidMount() {

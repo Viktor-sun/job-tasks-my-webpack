@@ -70,7 +70,8 @@ class TodoItem extends Component {
             className={s.checkbox}
             type="checkbox"
             name="checkbox"
-            defaultChecked={completed}
+            checked={completed}
+            readOnly
             onClick={this.handleSwitchCheckbox}
           />
           <span className={hideCheckbox || showCheck}></span>

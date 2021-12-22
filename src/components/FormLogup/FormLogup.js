@@ -2,11 +2,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import s from './FormLogup.module.css'
+import { userOperations } from '@redux/thunks'
 
 class FormLogup extends Component {
+  handleSubmit = e => {
+    e.preventDefault()
+    this.props.onSubmit()
+  }
+
   render() {
     return (
-      <form className={s.form}>
+      <form className={s.form} onSubmit={this.handleSubmit}>
         <input
           type="text"
           id="login"
@@ -34,6 +40,8 @@ class FormLogup extends Component {
 
 const mapStateToProps = () => ({})
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+  onSubmit: userOperations.logup,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormLogup)

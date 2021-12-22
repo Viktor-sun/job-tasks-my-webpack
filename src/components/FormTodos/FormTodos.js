@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import s from './FormTodos.module.css'
-import todosOperations from '../../redux/todos/todos-operations'
+import { todosOperations } from '@redux/thunks'
+import { todosSelectors } from '@redux/selectors'
 
 class FormTodos extends Component {
-  constructor() {
-    super()
-    this.state = { inputValue: '' }
+  constructor(props) {
+    super(props)
+    this.state = {
+      inputValue: '',
+    }
   }
 
-  changeInput = e => {
+  handleChange = e => {
     this.setState({ inputValue: e.target.value.trim() })
   }
 
@@ -19,12 +22,32 @@ class FormTodos extends Component {
     this.setState({ inputValue: '' })
   }
 
+  handleSelectAll = isAllCompleted => () => {
+    if (isAllCompleted) {
+      this.props.unselectAll()
+      return
+    }
+    this.props.selectAll()
+  }
+
+  isAllCompleted() {
+    return this.props.todos.every(({ completed }) => completed)
+  }
+
   render() {
     const { inputValue } = this.state
+    const { todos } = this.props
+    const isAllCompleted = this.isAllCompleted()
+    const isActive = isAllCompleted ? s.btnActive : s.btn
+    const hide = todos.length === 0 && s.hideBtn
 
     return (
       <form className={s.form} onSubmit={this.handleSubmit}>
-        <button type="button" className={s.btn}>
+        <button
+          type="button"
+          className={hide || isActive}
+          onClick={this.handleSelectAll(isAllCompleted)}
+        >
           ❯
         </button>
         <input
@@ -33,7 +56,7 @@ class FormTodos extends Component {
           placeholder="What needs to be done?"
           autoFocus={true}
           className={s.input}
-          onChange={this.changeInput}
+          onChange={this.handleChange}
           value={inputValue}
         />
       </form>
@@ -41,8 +64,12 @@ class FormTodos extends Component {
   }
 }
 
+const mapStateToProps = state => ({ todos: todosSelectors.getTodos(state) })
+
 const mapDispatchToProps = {
   addTodo: todosOperations.addTodo,
+  selectAll: todosOperations.selectAllTodo,
+  unselectAll: todosOperations.unselectAllTodo,
 }
 
-export default connect(null, mapDispatchToProps)(FormTodos)
+export default connect(mapStateToProps, mapDispatchToProps)(FormTodos)

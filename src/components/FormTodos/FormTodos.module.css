@@ -39,9 +39,18 @@
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 250ms ease;
+  opacity: 1;
+  visibility: visible;
+  transition: all 250ms ease;
 }
 
-/* .btn.isSelect {
+.btnActive {
+  composes: btn;
   color: #737373;
-} */
+}
+
+.hideBtn {
+  composes: btn;
+  opacity: 0;
+  visibility: hidden;
+}

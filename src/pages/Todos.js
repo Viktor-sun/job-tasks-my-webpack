@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Layout from '../components/Layout'
 import Form from '../components/FormTodos'
 import TodosList from '../components/TodosList'
 import TodosFooter from '../components/TodosFooter/TodosFooter'
+import { todosSelectors } from '../redux/selectors'
 
 class TodosPage extends Component {
   render() {
+    const { todos } = this.props
+
     return (
-      <Layout withNav withTitle titleText="todos">
+      <Layout withTitle titleText="todos">
         <h2 className="titleHello">Hello undefined</h2>
         <button className="btnLogout">logout</button>
         <div
@@ -20,11 +24,13 @@ class TodosPage extends Component {
         >
           <Form />
           <TodosList />
-          <TodosFooter />
+          {todos.length !== 0 && <TodosFooter />}
         </div>
       </Layout>
     )
   }
 }
 
-export default TodosPage
+const mapStateToProps = state => ({ todos: todosSelectors.getTodos(state) })
+
+export default connect(mapStateToProps)(TodosPage)
