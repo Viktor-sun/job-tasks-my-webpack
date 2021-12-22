@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import Title from '../components/Title'
+import Layout from '../components/Layout'
 import Form from '../components/FormLogup'
 
 class RegisterPage extends Component {
   render() {
     return (
-      <>
-        <Title text="log up" />
+      <Layout withTitle titleText="log up">
         <Form />
-      </>
+      </Layout>
     )
   }
 }

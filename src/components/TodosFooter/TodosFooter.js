@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import s from './Footer.module.css'
+import s from './TodosFooter.module.css'
 
-class Footer extends Component {
+class TodosFooter extends Component {
   render() {
     return (
       <footer className={s.footer}>
@@ -34,4 +34,4 @@ const mapStateToProps = () => ({})
 
 const mapDispatchToProps = {}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Footer)
+export default connect(mapStateToProps, mapDispatchToProps)(TodosFooter)

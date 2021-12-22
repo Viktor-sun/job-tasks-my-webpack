@@ -1,31 +1,26 @@
 import React, { Component } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Container from './components/Container'
-import TodosPage from './views/TodosPage'
-import RegisterPage from './views/RegisterPage'
-import LoginPage from './views/LoginPage'
-import Navigation from './components/Navigation/Navigation'
+import TodosPage from './pages/Todos'
+import RegisterPage from './pages/Register'
+import LoginPage from './pages/Login'
+import routes from './routes'
 
 class App extends Component {
   render() {
     return (
-      <Container>
-        <Navigation />
-
-        <Routes>
-          <Route path="todos" element={<TodosPage />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="logup" element={<RegisterPage />} />
-          <Route
-            path="*"
-            element={
-              <main style={{ padding: '1rem' }}>
-                <p>There&apos;s nothing here!</p>
-              </main>
-            }
-          />
-        </Routes>
-      </Container>
+      <Routes>
+        <Route path={routes.todos} element={<TodosPage />} />
+        <Route path={routes.login} element={<LoginPage />} />
+        <Route path={routes.logup} element={<RegisterPage />} />
+        <Route
+          path="*"
+          element={
+            <main style={{ padding: '1rem' }}>
+              <p>There&apos;s nothing here!</p>
+            </main>
+          }
+        />
+      </Routes>
     )
   }
 }

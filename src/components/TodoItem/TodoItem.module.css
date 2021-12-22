@@ -1,0 +1,128 @@
+.item {
+  position: relative;
+  width: 100%;
+
+  padding: 15px 50px 15px 65px;
+  line-height: 1.2;
+  font-size: 24px;
+  border-bottom: 1px solid #ededed;
+  overflow-wrap: break-word;
+  transition: all 250ms ease-out;
+}
+
+.item:first-child {
+  border-top: 1px solid #ededed;
+}
+
+.itemUnactive {
+  composes: item;
+  text-decoration: line-through;
+  color: #d9d9d9;
+}
+
+.btnDel {
+  position: absolute;
+  top: -4px;
+  right: 12px;
+  width: 20px;
+  height: 20px;
+  margin: auto 0;
+  font-size: 30px;
+  color: #cc9a9a;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 11px;
+  transition: color 0.2s ease-out, opacity 0.2s ease-out;
+  opacity: 0;
+  z-index: 5;
+}
+
+.btnDel::after {
+  content: '×';
+}
+
+.btnCopyText {
+  position: absolute;
+  top: 27px;
+  right: 14px;
+  width: 20px;
+  height: 20px;
+  margin: auto 0;
+  font-size: 30px;
+  color: #cc9a9a;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 11px;
+  transition: color 0.2s ease-out, opacity 0.2s ease-out;
+  opacity: 0;
+  z-index: 5;
+}
+
+.btnCopyText::after {
+  content: '©';
+}
+
+.item:hover .btnDel,
+.item:hover .btnCopyText {
+  color: #af5b5e;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.checkbox {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+}
+
+.checkboxIcon {
+  position: absolute;
+  top: 9px;
+  left: 8px;
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  border: solid 2px #ededed;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 1;
+  transition: all 250ms ease-out;
+}
+
+.checkboxChecked {
+  composes: checkboxIcon;
+  background-image: url('../../assets/svg/ok.svg');
+  background-size: contain;
+  border: solid 2px #bddad5;
+  border-radius: 50%;
+}
+
+.isHiddenCheckbox {
+  composes: checkboxIcon;
+  opacity: 0;
+}
+
+.update {
+  position: absolute;
+  top: 0px;
+  left: 61px;
+  height: 100%;
+  width: 89%;
+  font-size: 24px;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: 1.4em;
+  border: 0;
+  color: inherit;
+  padding: 6px;
+  border: 1px solid #999;
+  box-shadow: 0px -2px 10px 3px rgba(34, 60, 80, 0.2) inset;
+  box-sizing: border-box;
+  background-color: #fefefe;
+  z-index: 10;
+}

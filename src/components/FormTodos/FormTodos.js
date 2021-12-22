@@ -4,13 +4,16 @@ import s from './FormTodos.module.css'
 import todosOperations from '../../redux/todos/todos-operations'
 
 class FormTodos extends Component {
-  state = { inputValue: '' }
+  constructor() {
+    super()
+    this.state = { inputValue: '' }
+  }
 
   changeInput = e => {
     this.setState({ inputValue: e.target.value.trim() })
   }
 
-  onSubmit = e => {
+  handleSubmit = e => {
     e.preventDefault()
     this.props.addTodo(this.state.inputValue)
     this.setState({ inputValue: '' })
@@ -20,7 +23,7 @@ class FormTodos extends Component {
     const { inputValue } = this.state
 
     return (
-      <form className={s.form} onSubmit={this.onSubmit}>
+      <form className={s.form} onSubmit={this.handleSubmit}>
         <button type="button" className={s.btn}>
           ❯
         </button>

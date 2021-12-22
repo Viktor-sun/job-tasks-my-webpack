@@ -1,18 +1,16 @@
 import React, { Component } from 'react'
-import Title from '../components/Title'
+import Layout from '../components/Layout'
 import Form from '../components/FormTodos'
 import TodosList from '../components/TodosList'
-import Footer from '../components/Footer/Footer'
+import TodosFooter from '../components/TodosFooter/TodosFooter'
 
 class TodosPage extends Component {
   render() {
     return (
-      <>
-        <Title text="todos" />
+      <Layout withNav withTitle titleText="todos">
         <h2 className="titleHello">Hello undefined</h2>
         <button className="btnLogout">logout</button>
         <div
-          className="formContainer"
           style={{
             backgroundColor: '#fefefe',
             boxShadow: '1px 23px 28px -3px rgba(114, 114, 114, 0.2)',
@@ -22,10 +20,9 @@ class TodosPage extends Component {
         >
           <Form />
           <TodosList />
-
-          <Footer />
+          <TodosFooter />
         </div>
-      </>
+      </Layout>
     )
   }
 }
