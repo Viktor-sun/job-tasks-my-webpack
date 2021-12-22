@@ -59,6 +59,7 @@ module.exports = {
     extensions: ['.js', '.ts', '.jsx', '.scss', '.css', '.jpg', '.svg'],
     alias: {
       '@utils': path.resolve(__dirname, '../src/utils/'),
+      '@redux': path.resolve(__dirname, '../src/redux/'),
       '@assets': path.resolve(__dirname, '../src/assets/'),
     },
   },
