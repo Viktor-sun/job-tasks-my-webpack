@@ -4,5 +4,12 @@ const getActiveTodos = state =>
 const getCompletedTodos = state =>
   state.todos.todos.filter(todo => todo.completed)
 const getFilter = state => state.todos.filter
+const getLoading = state => state.todos.loading
 
-export default { getTodos, getActiveTodos, getCompletedTodos, getFilter }
+export default {
+  getTodos,
+  getActiveTodos,
+  getCompletedTodos,
+  getFilter,
+  getLoading,
+}

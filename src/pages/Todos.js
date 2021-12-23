@@ -8,10 +8,10 @@ import { todosSelectors } from '../redux/selectors'
 
 class TodosPage extends Component {
   render() {
-    const { todos } = this.props
+    const { todos, loading } = this.props
 
     return (
-      <Layout withTitle titleText="todos">
+      <Layout withTitle titleText="todos" withSpinner={loading}>
         <h2 className="titleHello">Hello undefined</h2>
         <button className="btnLogout">logout</button>
         <div
@@ -31,6 +31,9 @@ class TodosPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({ todos: todosSelectors.getTodos(state) })
+const mapStateToProps = state => ({
+  todos: todosSelectors.getTodos(state),
+  loading: todosSelectors.getLoading(state),
+})
 
 export default connect(mapStateToProps)(TodosPage)

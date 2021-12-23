@@ -53,12 +53,40 @@ const errorReducer = createReducer(null, {
   [actionsTodos.unselectAllTodo.Success]: () => null,
 })
 
-const changeFilter = createReducer('all', {
+const changeFilterReducer = createReducer('all', {
   [actionsTodos.changeFilter]: (_, { payload }) => payload,
+})
+
+const loadingReducer = createReducer(false, {
+  [actionsTodos.fetchTodo.Request]: () => true,
+  [actionsTodos.fetchTodo.Success]: () => false,
+  [actionsTodos.fetchTodo.Error]: () => false,
+  [actionsTodos.addTodo.Request]: () => true,
+  [actionsTodos.addTodo.Success]: () => false,
+  [actionsTodos.addTodo.Error]: () => false,
+  [actionsTodos.deleteTodo.Request]: () => true,
+  [actionsTodos.deleteTodo.Success]: () => false,
+  [actionsTodos.deleteTodo.Error]: () => false,
+  [actionsTodos.selectTodo.Request]: () => true,
+  [actionsTodos.selectTodo.Success]: () => false,
+  [actionsTodos.selectTodo.Error]: () => false,
+  [actionsTodos.updateTodo.Request]: () => true,
+  [actionsTodos.updateTodo.Success]: () => false,
+  [actionsTodos.updateTodo.Error]: () => false,
+  [actionsTodos.selectAllTodo.Request]: () => true,
+  [actionsTodos.selectAllTodo.Success]: () => false,
+  [actionsTodos.selectAllTodo.Error]: () => false,
+  [actionsTodos.unselectAllTodo.Request]: () => true,
+  [actionsTodos.unselectAllTodo.Success]: () => false,
+  [actionsTodos.unselectAllTodo.Error]: () => false,
+  [actionsTodos.clearCompleted.Request]: () => true,
+  [actionsTodos.clearCompleted.Success]: () => false,
+  [actionsTodos.clearCompleted.Error]: () => false,
 })
 
 export default combineReducers({
   todos: todosReducer,
   error: errorReducer,
-  filter: changeFilter,
+  filter: changeFilterReducer,
+  loading: loadingReducer,
 })
