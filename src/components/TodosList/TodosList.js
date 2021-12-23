@@ -17,8 +17,25 @@ export class TodosList extends Component {
     return this.props.updateTodo(id, value)
   }
 
+  getFilteredTodos() {
+    const { todos, todosAtive, todosCompleted, filter } = this.props
+
+    switch (filter) {
+      case 'all':
+        return todos
+      case 'active':
+        return todosAtive
+      case 'completed':
+        return todosCompleted
+
+      default:
+        return todos
+    }
+  }
+
   render() {
-    const { todos, selectTodo, deleteTodo } = this.props
+    const { selectTodo, deleteTodo } = this.props
+    const todos = this.getFilteredTodos()
 
     return (
       <div className="todoContainer">
@@ -40,7 +57,12 @@ export class TodosList extends Component {
   }
 }
 
-const mapStateToProps = state => ({ todos: todosSelectors.getTodos(state) })
+const mapStateToProps = state => ({
+  todos: todosSelectors.getTodos(state),
+  todosAtive: todosSelectors.getActiveTodos(state),
+  todosCompleted: todosSelectors.getCompletedTodos(state),
+  filter: todosSelectors.getFilter(state),
+})
 
 const { fetchTodos, deleteTodo, selectTodo, updateTodo } = todosOperations
 const mapDispatchToProps = {

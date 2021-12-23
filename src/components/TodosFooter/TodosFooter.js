@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import s from './TodosFooter.module.css'
 import { todosOperations } from '@redux/thunks'
 import { todosSelectors } from '@redux/selectors'
+import { actionsTodos } from '@redux/actions'
 
 class TodosFooter extends Component {
   handleClear = () => {
@@ -20,6 +21,7 @@ class TodosFooter extends Component {
   }
 
   render() {
+    const { filter } = this.props
     const hasCompletedTodo = this.hasCompletedTodo()
     const activeElements = this.getActiveElements()
 
@@ -30,17 +32,35 @@ class TodosFooter extends Component {
         </span>
         <ul className={s.btnList}>
           <li>
-            <button type="button" id="buttonAll" className={s.sortBtn}>
+            <button
+              type="button"
+              onClick={() => {
+                this.props.changeFilter('all')
+              }}
+              className={filter === 'all' ? s.activeSortBtn : s.sortBtn}
+            >
               All
             </button>
           </li>
           <li>
-            <button type="button" id="butttonActive" className={s.sortBtn}>
+            <button
+              type="button"
+              onClick={() => {
+                this.props.changeFilter('active')
+              }}
+              className={filter === 'active' ? s.activeSortBtn : s.sortBtn}
+            >
               Active
             </button>
           </li>
           <li>
-            <button type="button" id="buttonCompleted" className={s.sortBtn}>
+            <button
+              type="button"
+              onClick={() => {
+                this.props.changeFilter('completed')
+              }}
+              className={filter === 'completed' ? s.activeSortBtn : s.sortBtn}
+            >
               Completed
             </button>
           </li>
@@ -55,10 +75,14 @@ class TodosFooter extends Component {
   }
 }
 
-const mapStateToProps = state => ({ todos: todosSelectors.getTodos(state) })
+const mapStateToProps = state => ({
+  todos: todosSelectors.getTodos(state),
+  filter: todosSelectors.getFilter(state),
+})
 
 const mapDispatchToProps = {
   clear: todosOperations.clearCompleted,
+  changeFilter: actionsTodos.changeFilter,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodosFooter)

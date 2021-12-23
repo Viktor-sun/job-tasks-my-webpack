@@ -53,4 +53,12 @@ const errorReducer = createReducer(null, {
   [actionsTodos.unselectAllTodo.Success]: () => null,
 })
 
-export default combineReducers({ todos: todosReducer, error: errorReducer })
+const changeFilter = createReducer('all', {
+  [actionsTodos.changeFilter]: (_, { payload }) => payload,
+})
+
+export default combineReducers({
+  todos: todosReducer,
+  error: errorReducer,
+  filter: changeFilter,
+})

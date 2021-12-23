@@ -1,4 +1,4 @@
-import { createAsyncActions } from '@utils/redux-tools'
+import { createAsyncActions, createAction } from '@utils/redux-tools'
 
 const fetchTodo = createAsyncActions('todos/fetchTodos')
 const addTodo = createAsyncActions('todos/addTodo')
@@ -8,6 +8,7 @@ const updateTodo = createAsyncActions('todos/updateTodo')
 const selectAllTodo = createAsyncActions('todos/selectAllTodo')
 const unselectAllTodo = createAsyncActions('todos/unselectAllTodo')
 const clearCompleted = createAsyncActions('todos/clearCompleted')
+const changeFilter = createAction('todos/changeFilter')
 
 export default {
   fetchTodo,
@@ -18,4 +19,5 @@ export default {
   selectAllTodo,
   unselectAllTodo,
   clearCompleted,
+  changeFilter,
 }

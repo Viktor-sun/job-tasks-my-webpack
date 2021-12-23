@@ -37,9 +37,10 @@
   border-color: rgba(175, 47, 47, 0.1);
 }
 
-/* .sortButton.activeSortButton {
+.activeSortBtn {
+  composes: sortBtn;
   border-color: #efd5d5;
-} */
+}
 
 .btnClear {
   margin-left: auto;
@@ -54,7 +55,3 @@
 .btnClear:hover {
   text-decoration: underline;
 }
-
-/* .btnClear.isHidden {
-  cursor: grab;
-} */
