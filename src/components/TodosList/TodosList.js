@@ -6,6 +6,11 @@ import { todosOperations } from '@redux/thunks'
 import { todosSelectors } from '@redux/selectors'
 
 export class TodosList extends Component {
+  constructor(props) {
+    super(props)
+    this.updateTodo = this.updateTodo.bind(this)
+  }
+
   componentDidMount() {
     this.props.fetchTodos()
   }
@@ -48,7 +53,7 @@ export class TodosList extends Component {
               completed={completed}
               onSelect={selectTodo}
               onDelete={deleteTodo}
-              onUpdate={this.updateTodo.bind(this)}
+              onUpdate={this.updateTodo}
             />
           ))}
         </ul>

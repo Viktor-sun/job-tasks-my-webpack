@@ -5,67 +5,41 @@ import { todosOperations } from '@redux/thunks'
 import { todosSelectors } from '@redux/selectors'
 import { actionsTodos } from '@redux/actions'
 
+const SORT_BTN = [
+  { name: 'All', filter: 'all' },
+  { name: 'Active', filter: 'active' },
+  { name: 'Completed', filter: 'completed' },
+]
+
 class TodosFooter extends Component {
   handleClear = () => {
     this.props.clear()
   }
 
-  hasCompletedTodo() {
-    const { todos } = this.props
-    return todos.some(todo => todo.completed)
-  }
-
-  getActiveElements() {
-    const { todos } = this.props
-    return todos.filter(({ completed }) => !completed).length
-  }
-
   render() {
-    const { filter } = this.props
-    const hasCompletedTodo = this.hasCompletedTodo()
-    const activeElements = this.getActiveElements()
+    const { filter, todosAtive, todosCompleted } = this.props
 
     return (
       <footer className={s.footer}>
         <span className={s.counter}>
-          {activeElements} item left{activeElements > 1 ? 's' : ''}
+          {todosAtive.length} item left{todosAtive.length ? '' : 's'}
         </span>
         <ul className={s.btnList}>
-          <li>
-            <button
-              type="button"
-              onClick={() => {
-                this.props.changeFilter('all')
-              }}
-              className={filter === 'all' ? s.activeSortBtn : s.sortBtn}
-            >
-              All
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              onClick={() => {
-                this.props.changeFilter('active')
-              }}
-              className={filter === 'active' ? s.activeSortBtn : s.sortBtn}
-            >
-              Active
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              onClick={() => {
-                this.props.changeFilter('completed')
-              }}
-              className={filter === 'completed' ? s.activeSortBtn : s.sortBtn}
-            >
-              Completed
-            </button>
-          </li>
+          {SORT_BTN.map(btn => (
+            <li key={btn.name}>
+              <button
+                type="button"
+                onClick={() => {
+                  this.props.changeFilter(btn.filter)
+                }}
+                className={filter === btn.filter ? s.activeSortBtn : s.sortBtn}
+              >
+                {btn.name}
+              </button>
+            </li>
+          ))}
         </ul>
-        {hasCompletedTodo && (
+        {Boolean(todosCompleted.length) && (
           <button className={s.btnClear} onClick={this.handleClear}>
             Clear completed
           </button>
@@ -76,7 +50,8 @@ class TodosFooter extends Component {
 }
 
 const mapStateToProps = state => ({
-  todos: todosSelectors.getTodos(state),
+  todosAtive: todosSelectors.getActiveTodos(state),
+  todosCompleted: todosSelectors.getCompletedTodos(state),
   filter: todosSelectors.getFilter(state),
 })
 

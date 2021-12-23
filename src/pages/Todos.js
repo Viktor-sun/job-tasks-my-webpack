@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Layout from '../components/Layout'
-import Form from '../components/FormTodos'
+import TodosForm from '../components/FormTodos'
 import TodosList from '../components/TodosList'
 import TodosFooter from '../components/TodosFooter/TodosFooter'
 import { todosSelectors } from '../redux/selectors'
@@ -22,9 +22,9 @@ class TodosPage extends Component {
             borderTop: 'none',
           }}
         >
-          <Form />
+          <TodosForm />
           <TodosList />
-          {todos.length !== 0 && <TodosFooter />}
+          {todos.length && <TodosFooter />}
         </div>
       </Layout>
     )

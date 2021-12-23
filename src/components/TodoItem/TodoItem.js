@@ -6,7 +6,6 @@ class TodoItem extends Component {
     super(props)
     this.state = {
       isEditMode: false,
-      todoId: this.props.id,
       editTodo: this.props.todo,
     }
   }
@@ -16,11 +15,11 @@ class TodoItem extends Component {
   }
 
   handleSwitchCheckbox = e => {
-    this.props.onSelect(this.state.todoId, e.target.checked)
+    this.props.onSelect(this.props.id, e.target.checked)
   }
 
   handleDelete = () => {
-    this.props.onDelete(this.state.todoId)
+    this.props.onDelete(this.props.id)
   }
 
   handleCopyText = e => {
@@ -34,24 +33,20 @@ class TodoItem extends Component {
   }
 
   handleUpdate = () => {
-    this.update()
-  }
-
-  handleKey = e => {
-    if (e.code === 'Enter') {
-      this.update()
-    }
-  }
-
-  update() {
-    const { todoId, editTodo } = this.state
-    const { todo } = this.props
+    const { editTodo } = this.state
+    const { todo, id } = this.props
     if (todo === editTodo) {
       return this.setState({ isEditMode: false })
     }
     this.props
-      .onUpdate(todoId, editTodo)
+      .onUpdate(id, editTodo)
       .then(() => this.setState({ isEditMode: false }))
+  }
+
+  handleKey = e => {
+    if (e.code === 'Enter') {
+      this.handleUpdate()
+    }
   }
 
   render() {

@@ -10,7 +10,7 @@ export const callApi = (path, options) => {
     method: 'GET',
   }
   return fetch(`${url}${path}`, { ...defaultOptions, ...options })
-    .then(r => (options?.method === 'DELETE' ? r : r.json()))
+    .then(r => (r.status === 204 ? {} : r.json()))
     .then(d => {
       if (d.code < 200 || d.code > 399) {
         return Promise.reject(d)
