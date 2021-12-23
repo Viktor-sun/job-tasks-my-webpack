@@ -1,12 +1,20 @@
 import { actionsUsers } from '../actions'
-// import { callApi } from '../../helpers/callApi'
+import { callApi } from '../../helpers/callApi'
 
-const logup = () => dispatch => {
+const logup = credentials => dispatch => {
   dispatch(actionsUsers.logup.Request())
 
-  //   callApi('/api/user')
-  //   .then(data => dispatch(actionsUsers.logup.Success(data.data.todos)))
-  //   .catch(e => dispatch(actionsUsers.logup.Error(e.message)))
+  callApi('/api/users/signup', { method: 'POST', body: credentials })
+    .then(data => dispatch(actionsUsers.logup.Success(data.data.user)))
+    .catch(e => dispatch(actionsUsers.logup.Error(e.message)))
 }
 
-export default { logup }
+const login = credentials => dispatch => {
+  dispatch(actionsUsers.logup.Request())
+
+  callApi('/api/users/login', { method: 'POST', body: credentials })
+    .then(data => dispatch(actionsUsers.logup.Success(data.data.user)))
+    .catch(e => dispatch(actionsUsers.logup.Error(e.message)))
+}
+
+export default { logup, login }

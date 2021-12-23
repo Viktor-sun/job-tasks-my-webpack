@@ -6,9 +6,16 @@ const userReducer = createReducer(
   {},
   {
     [actionsUsers.logup.Success]: (state, { payload }) => payload,
+    [actionsUsers.login.Success]: (state, { payload }) => payload,
   },
 )
 
-// const errorReducer = createReducer()
+const errorReducer = createReducer(null, {
+  [actionsUsers.logup.Error]: (_, { payload }) => payload,
+  [actionsUsers.login.Error]: (_, { payload }) => payload,
 
-export default combineReducers({ user: userReducer })
+  [actionsUsers.logup.Success]: () => null,
+  [actionsUsers.login.Success]: () => null,
+})
+
+export default combineReducers({ user: userReducer, error: errorReducer })
