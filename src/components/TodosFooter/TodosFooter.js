@@ -22,7 +22,7 @@ class TodosFooter extends Component {
     return (
       <footer className={s.footer}>
         <span className={s.counter}>
-          {todosAtive.length} item left{todosAtive.length ? '' : 's'}
+          {todosAtive.length} item left{todosAtive.length > 1 ? 's' : ''}
         </span>
         <ul className={s.btnList}>
           {SORT_BTN.map(btn => (
