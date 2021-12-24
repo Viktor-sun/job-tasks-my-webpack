@@ -1,8 +1,9 @@
-import React from 'react'
-import TodosPage from './pages/Todos'
-import RegisterPage from './pages/Register'
-import LoginPage from './pages/Login'
-import NotFoundPage from './pages/NotFound'
+import React, { lazy } from 'react'
+
+const TodosPage = lazy(() => import('./pages/Todos'))
+const RegisterPage = lazy(() => import('./pages/Register'))
+const LoginPage = lazy(() => import('./pages/Login'))
+const NotFoundPage = lazy(() => import('./pages/NotFound'))
 
 export const navRoutes = {
   todos: { name: 'todos', to: '/todos' },
