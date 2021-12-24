@@ -13,6 +13,7 @@ export class FormLogin extends Component {
       password: '',
       nameValid: null,
       passwordValid: null,
+      showPassword: false,
     }
   }
 
@@ -20,8 +21,8 @@ export class FormLogin extends Component {
     if (fieldValue === '') {
       return `${fieldName} is required`
     }
-    if (/[^a-zA-Z -]/.test(fieldValue)) {
-      return 'Invalid characters'
+    if (/[^a-zA-Z-а-яА-Я -]/.test(fieldValue)) {
+      return 'invalid characters'
     }
     if (fieldValue.length < 3) {
       return `${fieldName} needs to be at least three characters`
@@ -68,31 +69,44 @@ export class FormLogin extends Component {
     this.setState({ name: '', password: '' })
   }
 
+  handleShowPassword = () => {
+    this.setState(prevState => ({ showPassword: !prevState.showPassword }))
+  }
+
   render() {
-    const { name, password, nameValid, passwordValid } = this.state
+    const { name, password, nameValid, passwordValid, showPassword } =
+      this.state
 
     return (
       <form className={s.form} onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          autoComplete="off"
-          placeholder="Enter login"
-          className={s.input}
-          name="name"
-          value={name}
-          onChange={this.handleChange}
-        />
-        {nameValid && <p>{nameValid}</p>}
-        <input
-          type="password"
-          autoComplete="off"
-          placeholder="Enter password"
-          className={s.input}
-          name="password"
-          value={password}
-          onChange={this.handleChange}
-        />
-        {passwordValid && <p>{passwordValid}</p>}
+        <label className={s.inputLabel}>
+          <input
+            type="text"
+            autoComplete="off"
+            placeholder="Enter login"
+            className={s.input}
+            name="name"
+            value={name}
+            onChange={this.handleChange}
+          />
+          {nameValid && <p className={s.validError}>{nameValid}</p>}
+        </label>
+        <label className={s.inputLabel}>
+          <input
+            type={showPassword ? 'text' : 'password'}
+            autoComplete="off"
+            placeholder="Enter password"
+            className={s.input}
+            name="password"
+            value={password}
+            onChange={this.handleChange}
+          />
+          <span
+            className={showPassword ? s.iconPassShow : s.iconPassHidden}
+            onClick={this.handleShowPassword}
+          ></span>
+          {passwordValid && <p className={s.validError}>{passwordValid}</p>}
+        </label>
         <button type="submit" className={s.btn}>
           Submit
         </button>

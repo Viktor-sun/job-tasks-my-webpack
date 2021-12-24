@@ -6,6 +6,10 @@
   border-top: none;
 }
 
+.inputLabel {
+  position: relative;
+}
+
 .input {
   width: 100%;
   height: 66px;
@@ -44,4 +48,33 @@
 
 .btn:hover {
   background-color: rgba(175, 47, 47, 0.3);
+}
+
+.iconPass {
+  position: absolute;
+  top: -8px;
+  left: 479px;
+  display: block;
+  width: 25px;
+  height: 25px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: background 250ms ease-out;
+}
+
+.iconPassShow {
+  composes: iconPass;
+  background-image: url('../../assets/svg/eye.svg');
+}
+
+.iconPassHidden {
+  composes: iconPass;
+  background-image: url('../../assets/svg/hidden.svg');
+}
+
+.validError {
+  margin: 0;
+  color: crimson;
+  margin-left: 55px;
+  font-size: 17px;
 }
