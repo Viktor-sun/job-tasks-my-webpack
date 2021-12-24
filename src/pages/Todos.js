@@ -11,9 +11,7 @@ class TodosPage extends Component {
     const { todos, loading } = this.props
 
     return (
-      <Layout withTitle titleText="todos" withSpinner={loading}>
-        <h2 className="titleHello">Hello undefined</h2>
-        <button className="btnLogout">logout</button>
+      <Layout withTitle titleText="todos" withSpinner={loading} withAppbar>
         <div
           style={{
             backgroundColor: '#fefefe',
