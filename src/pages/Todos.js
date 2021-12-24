@@ -4,7 +4,7 @@ import Layout from '../components/Layout'
 import TodosForm from '../components/FormTodos'
 import TodosList from '../components/TodosList'
 import TodosFooter from '../components/TodosFooter/TodosFooter'
-import { todosSelectors } from '../redux/selectors'
+import { todosSelectors } from '@redux/selectors'
 
 class TodosPage extends Component {
   render() {
@@ -24,7 +24,7 @@ class TodosPage extends Component {
         >
           <TodosForm />
           <TodosList />
-          {todos.length && <TodosFooter />}
+          {Boolean(todos.length) && <TodosFooter />}
         </div>
       </Layout>
     )

@@ -18,4 +18,17 @@ const errorReducer = createReducer(null, {
   [actionsUsers.login.Success]: () => null,
 })
 
-export default combineReducers({ user: userReducer, error: errorReducer })
+const loadingReducer = createReducer(false, {
+  [actionsUsers.logup.Request]: () => true,
+  [actionsUsers.logup.Success]: () => false,
+  [actionsUsers.logup.Error]: () => false,
+  [actionsUsers.login.Request]: () => true,
+  [actionsUsers.login.Success]: () => false,
+  [actionsUsers.login.Error]: () => false,
+})
+
+export default combineReducers({
+  user: userReducer,
+  error: errorReducer,
+  loading: loadingReducer,
+})

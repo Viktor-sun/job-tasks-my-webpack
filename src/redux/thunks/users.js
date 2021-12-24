@@ -13,8 +13,8 @@ const login = credentials => dispatch => {
   dispatch(actionsUsers.logup.Request())
 
   callApi('/api/users/login', { method: 'POST', body: credentials })
-    .then(data => dispatch(actionsUsers.logup.Success(data.data.user)))
-    .catch(e => dispatch(actionsUsers.logup.Error(e.message)))
+    .then(data => dispatch(actionsUsers.login.Success(data.data.user)))
+    .catch(e => dispatch(actionsUsers.login.Error(e.message)))
 }
 
 export default { logup, login }
