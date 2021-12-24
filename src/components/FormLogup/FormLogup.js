@@ -11,12 +11,38 @@ class FormLogup extends Component {
     this.state = {
       name: '',
       password: '',
-      passwordEcho: '',
+      confirmPassword: '',
       nameValid: null,
       passwordValid: null,
-      passwordEchoValid: null,
+      confirmPasswordValid: null,
       showPassword: false,
-      showPasswordEcho: false,
+      showConfirmPassword: false,
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { name, password, confirmPassword } = this.state
+    if (prevState.name !== name) {
+      this.setState({
+        nameValid: this.nameValidation('Name', name),
+      })
+    }
+    if (prevState.password !== password) {
+      this.setState({
+        passwordValid: this.passwordValidation('Password', password),
+        confirmPasswordValid: this.confirmPasswordValidation(
+          password,
+          confirmPassword,
+        ),
+      })
+    }
+    if (prevState.confirmPassword !== confirmPassword) {
+      this.setState({
+        confirmPasswordValid: this.confirmPasswordValidation(
+          password,
+          confirmPassword,
+        ),
+      })
     }
   }
 
@@ -25,7 +51,7 @@ class FormLogup extends Component {
       return `${fieldName} is required`
     }
     if (/[^a-zA-Z-а-яА-Я -]/.test(fieldValue)) {
-      return 'invalid characters'
+      return 'Invalid characters'
     }
     if (fieldValue.length < 3) {
       return `${fieldName} needs to be at least three characters`
@@ -58,15 +84,7 @@ class FormLogup extends Component {
 
   handleChange = e => {
     const { name, value } = e.currentTarget
-    this.setState({
-      [name]: value.trim(),
-      [name + 'Valid']:
-        name === 'name'
-          ? this.nameValidation(name, value)
-          : name === 'password'
-          ? this.passwordValidation(name, value)
-          : this.confirmPasswordValidation(this.state.password, value),
-    })
+    this.setState({ [name]: value.trim() })
   }
 
   handleSubmit = e => {
@@ -76,11 +94,11 @@ class FormLogup extends Component {
       password,
       nameValid,
       passwordValid,
-      passwordEcho,
-      passwordEchoValid,
+      confirmPassword,
+      confirmPasswordValid,
     } = this.state
-    if (name === '' || password === '' || passwordEcho === '') return
-    const isValid = !nameValid && !passwordValid && !passwordEchoValid
+    if (name === '' || password === '' || confirmPassword === '') return
+    const isValid = !nameValid && !passwordValid && !confirmPasswordValid
     if (isValid) {
       this.props.onSubmit({ name, password })
       this.reset()
@@ -88,16 +106,16 @@ class FormLogup extends Component {
   }
 
   reset() {
-    this.setState({ name: '', password: '', passwordEcho: '' })
+    this.setState({ name: '', password: '', confirmPassword: '' })
   }
 
   handleShowPassword = () => {
     this.setState(prevState => ({ showPassword: !prevState.showPassword }))
   }
 
-  handleShowPasswordEcho = () => {
+  handleShowConfirmPassword = () => {
     this.setState(prevState => ({
-      showPasswordEcho: !prevState.showPasswordEcho,
+      showConfirmPassword: !prevState.showConfirmPassword,
     }))
   }
 
@@ -107,10 +125,10 @@ class FormLogup extends Component {
       password,
       nameValid,
       passwordValid,
-      passwordEcho,
-      passwordEchoValid,
+      confirmPassword,
+      confirmPasswordValid,
       showPassword,
-      showPasswordEcho,
+      showConfirmPassword,
     } = this.state
 
     return (
@@ -145,24 +163,24 @@ class FormLogup extends Component {
         </label>
         <label className={s.inputLabel}>
           <input
-            type={showPasswordEcho ? 'text' : 'password'}
+            type={showConfirmPassword ? 'text' : 'password'}
             autoComplete="off"
             placeholder="Confirm the password"
             className={s.input}
-            name="passwordEcho"
-            value={passwordEcho}
+            name="confirmPassword"
+            value={confirmPassword}
             onChange={this.handleChange}
           />
           <span
-            className={showPasswordEcho ? s.iconPassShow : s.iconPassHidden}
-            onClick={this.handleShowPasswordEcho}
+            className={showConfirmPassword ? s.iconPassShow : s.iconPassHidden}
+            onClick={this.handleShowConfirmPassword}
           ></span>
-          {passwordEchoValid && (
-            <p className={s.validError}>{passwordEchoValid}</p>
+          {confirmPasswordValid && (
+            <p className={s.validError}>{confirmPasswordValid}</p>
           )}
         </label>
         <button type="submit" className={s.btn}>
-          Submit
+          submit
         </button>
         <Link to={navRoutes.login.to} className={s.btn}>
           {navRoutes.login.name}

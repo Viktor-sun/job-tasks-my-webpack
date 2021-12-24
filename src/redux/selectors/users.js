@@ -1,3 +1,4 @@
+const getUser = state => state.user.user
 const getLoading = state => state.user.loading
 
-export default { getLoading }
+export default { getUser, getLoading }

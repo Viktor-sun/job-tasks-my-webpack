@@ -17,12 +17,26 @@ export class FormLogin extends Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const { name, password } = this.state
+    if (prevState.name !== name) {
+      this.setState({
+        nameValid: this.nameValidation('Name', name),
+      })
+    }
+    if (prevState.password !== password) {
+      this.setState({
+        passwordValid: this.passwordValidation('Password', password),
+      })
+    }
+  }
+
   nameValidation(fieldName, fieldValue) {
     if (fieldValue === '') {
       return `${fieldName} is required`
     }
     if (/[^a-zA-Z-а-яА-Я -]/.test(fieldValue)) {
-      return 'invalid characters'
+      return 'Invalid characters'
     }
     if (fieldValue.length < 3) {
       return `${fieldName} needs to be at least three characters`
@@ -45,13 +59,7 @@ export class FormLogin extends Component {
 
   handleChange = e => {
     const { name, value } = e.currentTarget
-    this.setState({
-      [name]: value.trim(),
-      [name + 'Valid']:
-        name === 'name'
-          ? this.nameValidation(name, value)
-          : this.passwordValidation(name, value),
-    })
+    this.setState({ [name]: value.trim() })
   }
 
   handleSubmit = e => {
@@ -108,7 +116,7 @@ export class FormLogin extends Component {
           {passwordValid && <p className={s.validError}>{passwordValid}</p>}
         </label>
         <button type="submit" className={s.btn}>
-          Submit
+          submit
         </button>
         <Link to={navRoutes.logup.to} className={s.btn}>
           {navRoutes.logup.name}

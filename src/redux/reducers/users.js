@@ -2,13 +2,10 @@ import { combineReducers } from 'redux'
 import { createReducer } from '@utils/redux-tools'
 import { actionsUsers } from '../actions'
 
-const userReducer = createReducer(
-  {},
-  {
-    [actionsUsers.logup.Success]: (state, { payload }) => payload,
-    [actionsUsers.login.Success]: (state, { payload }) => payload,
-  },
-)
+const userReducer = createReducer(null, {
+  [actionsUsers.logup.Success]: (state, { payload }) => payload,
+  [actionsUsers.login.Success]: (state, { payload }) => payload,
+})
 
 const errorReducer = createReducer(null, {
   [actionsUsers.logup.Error]: (_, { payload }) => payload,
