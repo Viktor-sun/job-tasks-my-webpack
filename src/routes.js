@@ -1,4 +1,6 @@
 import React, { lazy } from 'react'
+import PrivateRoute from './components/PrivateRoute'
+import PublicRoute from './components/PublicRoute'
 
 const TodosPage = lazy(() => import('./pages/Todos'))
 const RegisterPage = lazy(() => import('./pages/Register'))
@@ -14,15 +16,27 @@ export const navRoutes = {
 export const routes = [
   {
     path: navRoutes.todos.to,
-    component: <TodosPage />,
+    component: (
+      <PrivateRoute>
+        <TodosPage />
+      </PrivateRoute>
+    ),
   },
   {
     path: navRoutes.login.to,
-    component: <LoginPage />,
+    component: (
+      <PublicRoute>
+        <LoginPage />
+      </PublicRoute>
+    ),
   },
   {
     path: navRoutes.logup.to,
-    component: <RegisterPage />,
+    component: (
+      <PublicRoute>
+        <RegisterPage />/
+      </PublicRoute>
+    ),
   },
   {
     path: '*',
