@@ -17,4 +17,22 @@ const login = credentials => dispatch => {
     .catch(e => dispatch(actionsUsers.login.Error(e.message)))
 }
 
-export default { logup, login }
+const logout = userId => dispatch => {
+  dispatch(actionsUsers.logout.Request())
+
+  callApi('/api/users/logout', { method: 'POST', body: { _id: userId } })
+    .then(data => dispatch(actionsUsers.logout.Success(data.data.user)))
+    .catch(e => dispatch(actionsUsers.logout.Error(e.message)))
+}
+
+const getCurrent = () => (dispatch, getState) => {
+  const persistedUserId = getState().user.user._id
+  if (!persistedUserId) return
+
+  dispatch(actionsUsers.current.Request())
+  callApi(`/api/users/current/${persistedUserId}`)
+    .then(data => dispatch(actionsUsers.current.Success(data.data.user)))
+    .catch(e => dispatch(actionsUsers.current.Error(e.message)))
+}
+
+export default { logup, login, logout, getCurrent }

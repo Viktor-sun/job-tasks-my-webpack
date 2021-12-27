@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
 import s from './AppBar.module.css'
+import UserMenu from '../../UserMenu/UserMenu'
 
 class AppBar extends Component {
   render() {
     return (
       <header className={s.header}>
         <div className={s.container}>
-          <ul className={s.userMenu}>
-            <li>Hello Guest</li>
-            <li>
-              <button type="button">logout</button>
-            </li>
-          </ul>
+          <UserMenu />
         </div>
       </header>
     )
