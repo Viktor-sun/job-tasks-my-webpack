@@ -13,7 +13,7 @@ export class UserMenu extends Component {
   render() {
     return (
       <ul className={s.userMenu}>
-        <li>Hello Guest</li>
+        <li>Hello {this.props.userName}</li>
         <li>
           <button type="button" onClick={this.handleLogout}>
             logout
@@ -25,7 +25,8 @@ export class UserMenu extends Component {
 }
 
 const mapStateToProps = state => ({
-  userId: userSelectors.getUser(state),
+  userName: userSelectors.getUser(state).name,
+  userId: userSelectors.getUser(state)._id,
 })
 
 const mapDispatchToProps = {
